@@ -1,7 +1,10 @@
 @import url("https://fonts.googleapis.com/css?family=Karla:400,700|Work+Sans:800");
 
 /* LESS Variables */
-@color-tema:#5433FF ;
+@color-tema:#5433FF;
+@images-width: 100%;
+@margin-padding: 2em;
+@tablet-max-width: 768px;
 
 html ,body{
     margin: 0;
@@ -37,21 +40,27 @@ html ,body{
     }
   }
 
+/* METHOD IN LESS */
+#text-center(){
+    text-align: center;
+}
+
 h1,h2,h3,h4,h5{
     font-family: "Work Sans", sans-serif!important;
 }
 
+/* Multiplying (Operations with LESS) */
 h1{
-    font-size: 6em!important;
+    font-size: @margin-padding * 3 !important;
 }
 
 h2{
-    text-align: center;
+    #text-center
 }
 
 #title1{
-    text-align: center;
     color: @color-tema;
+    #text-center
 }
 
 p{
@@ -62,47 +71,59 @@ p{
     display: table;
 
     background: @color-tema;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #A5FECB, #20BDFF, #5433FF);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #A5FECB, #20BDFF, #5433FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: -webkit-linear-gradient(to right, #A5FECB, #20BDFF, @color-tema);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #A5FECB, #20BDFF, @color-tema); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
     width: 100%;
     height: 50%;
 }
 
-@media (max-width: 768px){
+/* Variable and SUM */
+@media (max-width: @tablet-max-width + 1){
     .showcase{
         height: 100%;
     }
 }
 
 .showcase-text{
-    text-align: center;
     display: table-cell;
     vertical-align: middle;
+    #text-center
 }
 
 .content{
-    margin: 2em;
+    margin: @margin-padding;
 }
 
 .content-title{
-    padding-bottom: 2em;
+    padding-bottom: @margin-padding;
 }
 
-.profiles img{
-    width: 100%;
+/* LESS Nesting and Scope*/
+.profiles{
+
+    img{
+    width: @images-width;
+    transition: transform .2s;
+
+    &:hover{
+        transform: scale(1.5);
+    }
+
+    }
 }
 
 .profiles {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-gap: 2em;
+    grid-gap: @margin-padding;
 }
 
-@media (max-width: 767px){
+/* Variable as Media Query Parameter */
+@media (max-width: @tablet-max-width){
     .profiles {
         display: grid;
         grid-template-columns: 1fr;
-        grid-gap: 2em;
+        grid-gap: @margin-padding;
     }
 }
